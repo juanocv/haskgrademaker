@@ -6,13 +6,13 @@ Realizado por:\
 **- JUAN OLIVEIRA DE CARVALHO** [(juanocv)](https://github.com/juanocv)**\
 **- FERNANDO GABRIEL CHACON FERNANDES TERUEL DO PRADO** [(gabriel-chacon)](https://github.com/gabriel-chacon)**
 
-## TO-DOs (Parte 01)\
+## TO-DOs (Parte 01)
 - [X] Definir as estruturas de dados\
 - [X] Realizar o download do JSON do site da UFABC\
 - [X] Fazer o tratamento de dados do JSON\
 - [ ] Mostrar disciplinas em tela
 
-## TO-DOs (Parte 02)\
+## TO-DOs (Parte 02)
 - [ ] Criar menu interativo para usuário\
 - [ ] Permitir usuário criar nova grade\
 - [ ] Permitir usuário selecionar disciplinas\
