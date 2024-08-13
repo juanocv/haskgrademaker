@@ -4,34 +4,34 @@
 import Network.HTTP.Simple (httpBS, getResponseBody, parseRequest_)
 import Data.Aeson (FromJSON(..), withObject, (.:), (.:?), eitherDecode)
 import Data.Aeson.Types (parseEither)
+import Data.List (isPrefixOf)
+import Data.Char (toLower)
 import qualified Data.ByteString.Lazy as BSL
-import qualified Data.ByteString.Lazy.Char8 as BSL8
-import Data.Text (Text)
 
--- Data structures remain the same
+-- Data structures
 data Disciplina = Disciplina
-  { nome :: Text
+  { nome :: String
   , vagas :: Int
-  , vagasIngressantes :: Maybe Int  -- This is already Maybe Int, which is correct
+  , vagasIngressantes :: Maybe Int
   , tpi :: [Int]
   , creditos :: Int
   , id :: Int
-  , codigo :: Text
+  , codigo :: String
   , campus :: Int
   , horarios :: [Horario]
   , obrigatoriedades :: [Obrigatoriedade]
-  , nomeCampus :: Text
-  , recomendacoes :: Maybe [Text]
+  , nomeCampus :: String
+  , recomendacoes :: Maybe [String]
   } deriving (Show)
 
 data Horario = Horario
   { semana :: Int
-  , periodicidadeExtenso :: Text
-  , horas :: [Text]
+  , periodicidadeExtenso :: String
+  , horas :: [String]
   } deriving (Show)
 
 data Obrigatoriedade = Obrigatoriedade
-  { obrigatoriedade :: Text
+  { obrigatoriedade :: String
   , cursoId :: Int
   } deriving (Show)
 
@@ -40,7 +40,7 @@ instance FromJSON Disciplina where
   parseJSON = withObject "Disciplina" $ \v -> Disciplina
     <$> v .: "nome"
     <*> v .: "vagas"
-    <*> v .:? "vagas_ingressantes"  -- This correctly parses null as Nothing
+    <*> v .:? "vagas_ingressantes"
     <*> v .: "tpi"
     <*> v .: "creditos"
     <*> v .: "id"
@@ -51,7 +51,7 @@ instance FromJSON Disciplina where
     <*> v .: "nome_campus"
     <*> v .:? "recomendacoes"
 
--- FromJSON instances for Horario and Obrigatoriedade remain the same
+-- FromJSON instances for Horario and Obrigatoriedade
 instance FromJSON Horario where
   parseJSON = withObject "Horario" $ \v -> Horario
     <$> v .: "semana"
@@ -63,14 +63,13 @@ instance FromJSON Obrigatoriedade where
     <$> v .: "obrigatoriedade"
     <*> v .: "curso_id"
 
--- Preprocessing function remains the same
+-- Preprocessing function
 preprocessJSON :: BSL.ByteString -> BSL.ByteString
 preprocessJSON input =
-  let content = BSL8.dropWhile (/= '[') $ BSL8.dropWhile (/= '=') input
-      cleanedContent = BSL8.takeWhile (/= ';') content
-  in "{\"todasDisciplinas\":" <> cleanedContent <> "}"
+  let content = BSL.takeWhile (/= 59) $ BSL.dropWhile (/= 91) input
+  in "{\"todasDisciplinas\":" <> content <> "}"
 
--- Function to download JSON, preprocess, and parse it remains the same
+-- Function to download JSON, preprocess and parse
 downloadAndParseDisciplinas :: String -> IO (Either String [Disciplina])
 downloadAndParseDisciplinas url = do
   response <- httpBS $ parseRequest_ url
@@ -78,16 +77,79 @@ downloadAndParseDisciplinas url = do
   let processedData = preprocessJSON rawData
   return $ eitherDecode processedData >>= parseEither (.: "todasDisciplinas")
 
--- Main function now includes more detailed error reporting
+-- Function to show disciplinas
+showDisciplinas :: [Disciplina] -> [String]
+showDisciplinas []     = []
+showDisciplinas (d:ds) = showDisciplina d : showDisciplinas ds
+
+showDisciplina :: Disciplina -> String
+showDisciplina d = unlines
+  [ "Nome: " ++ (nome d)
+  , "Vagas: " ++ show (vagas d)
+  --, "Vagas Ingressantes: " ++ maybe "N/A" show (vagasIngressantes d)
+  , "TPI: " ++ show (tpi d)
+  , "Créditos: " ++ show (creditos d)
+  , "Código: " ++ codigo d
+  --, "Campus: " ++ show (campus d)
+  , nomeCampus d
+  --, "Recomendações: " ++ maybe "N/A" (T.unpack . T.unwords) (recomendacoes d)
+  , "Horários: " ++ showHorarios (horarios d)
+  --, "Categoria: " ++ showObrigatoriedades (obrigatoriedades d)
+  ]
+
+showHorarios :: [Horario] -> String
+showHorarios hs = unlines $ map showHorario hs
+
+showHorario :: Horario -> String
+showHorario h = unwords
+  [ "\n\tDia:", evenSemana
+  , "\n\tPeriodicidade" ++ periodicidadeExtenso h
+  , "\n\tPeríodo:", head(horas h), "-", last(horas h)
+  ]
+  where
+    evenSemana
+        | (semana h == 1) = "Segunda-feira"
+        | (semana h == 2) = "Terça-feira"
+        | (semana h == 3) = "Quarta-feira"
+        | (semana h == 4) = "Quinta-feira"
+        | (semana h == 5) = "Sexta-feira"
+        | (semana h == 6) = "Sábado"
+        | otherwise       = "Domingo"
+
+{-
+showObrigatoriedades :: [Obrigatoriedade] -> String
+showObrigatoriedades obs = unlines $ map showObrigatoriedade obs
+
+showObrigatoriedade :: Obrigatoriedade -> String
+showObrigatoriedade o = unwords
+  [ obrigatoriedade o
+  --, "\nCurso Id:", show (cursoId o)
+  ]
+-}
+
+-- Function to search for a given disciplina
+searchDisciplina :: String -> [Disciplina] -> Either String [Disciplina]
+searchDisciplina s ds =
+    let matches = filter (\d -> map toLower s `isPrefixOf` map toLower (nome d)) ds
+    in if null matches
+       then Left "Nenhuma disciplina encontrada com esse nome."
+       else Right matches
+
+-- Main function
 main :: IO ()
 main = do
   let url = "https://matricula.ufabc.edu.br/cache/todasDisciplinas.js"
   result <- downloadAndParseDisciplinas url
   case result of
     Right disciplinas -> do
-      putStrLn $ "Successfully downloaded " ++ show (length disciplinas) ++ " disciplinas"
-      mapM_ (putStrLn . show) (take 1 disciplinas)  -- Print the first disciplina as an example
+      putStrLn $ "Download com sucesso de " ++ show (length disciplinas) ++ " disciplinas"
+      putStrLn "Insira o nome da disciplina que deseja verificar: "
+      entry <- getLine
+      case searchDisciplina entry disciplinas of
+        Right matchedDisciplinas -> do
+          putStrLn $ concat $ showDisciplinas matchedDisciplinas
+        Left err -> putStrLn err
     Left err -> do
-      putStrLn "Failed to parse JSON. Error details:"
+      putStrLn "Falha ao realizar o parse do JSON. Detalhes do erro:"
       putStrLn err
-      putStrLn "This could be due to unexpected null values or mismatched types in the JSON data."
+      putStrLn "Isso pode ter ocorrido devido à valores null inesperados ou tipos incompatíveis no JSON."
