@@ -50,26 +50,6 @@
   (major1) == 2 && (major2) <  3 || \
   (major1) == 2 && (major2) == 3 && (minor) <= 8)
 #endif /* MIN_VERSION_http_conduit */
-/* package text-2.0.2 */
-#ifndef VERSION_text
-#define VERSION_text "2.0.2"
-#endif /* VERSION_text */
-#ifndef MIN_VERSION_text
-#define MIN_VERSION_text(major1,major2,minor) (\
-  (major1) <  2 || \
-  (major1) == 2 && (major2) <  0 || \
-  (major1) == 2 && (major2) == 0 && (minor) <= 2)
-#endif /* MIN_VERSION_text */
-/* package text-icu-0.8.0.5 */
-#ifndef VERSION_text_icu
-#define VERSION_text_icu "0.8.0.5"
-#endif /* VERSION_text_icu */
-#ifndef MIN_VERSION_text_icu
-#define MIN_VERSION_text_icu(major1,major2,minor) (\
-  (major1) <  0 || \
-  (major1) == 0 && (major2) <  8 || \
-  (major1) == 0 && (major2) == 8 && (minor) <= 0)
-#endif /* MIN_VERSION_text_icu */
 
 /* tool gcc-9 */
 #ifndef TOOL_VERSION_gcc
@@ -163,7 +143,7 @@
 #endif /* MIN_TOOL_VERSION_strip */
 
 #ifndef CURRENT_COMPONENT_ID
-#define CURRENT_COMPONENT_ID "haskgrademaker-0.1.0.0-3L39QmG4MRACBsy2jaRb7Y-haskgrademaker"
+#define CURRENT_COMPONENT_ID "haskgrademaker-0.1.0.0-4oRSWRqbLtMG4ZPhhAWk3J-haskgrademaker"
 #endif /* CURRENT_COMPONENT_ID */
 #ifndef CURRENT_PACKAGE_VERSION
 #define CURRENT_PACKAGE_VERSION "0.1.0.0"
