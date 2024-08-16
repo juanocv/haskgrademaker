@@ -51,15 +51,15 @@
   (major1) == 2 && (major2) == 3 && (minor) <= 8)
 #endif /* MIN_VERSION_http_conduit */
 
-/* tool gcc-9 */
+/* tool gcc-13 */
 #ifndef TOOL_VERSION_gcc
-#define TOOL_VERSION_gcc "9"
+#define TOOL_VERSION_gcc "13"
 #endif /* TOOL_VERSION_gcc */
 #ifndef MIN_TOOL_VERSION_gcc
 #define MIN_TOOL_VERSION_gcc(major1,major2,minor) (\
-  (major1) <  9 || \
-  (major1) == 9 && (major2) <  0 || \
-  (major1) == 9 && (major2) == 0 && (minor) <= 0)
+  (major1) <  13 || \
+  (major1) == 13 && (major2) <  0 || \
+  (major1) == 13 && (major2) == 0 && (minor) <= 0)
 #endif /* MIN_TOOL_VERSION_gcc */
 /* tool ghc-9.6.6 */
 #ifndef TOOL_VERSION_ghc
@@ -111,15 +111,15 @@
   (major1) == 0 && (major2) <  68 || \
   (major1) == 0 && (major2) == 68 && (minor) <= 9)
 #endif /* MIN_TOOL_VERSION_hsc2hs */
-/* tool pkg-config-0.29.1 */
+/* tool pkg-config-1.8.1 */
 #ifndef TOOL_VERSION_pkg_config
-#define TOOL_VERSION_pkg_config "0.29.1"
+#define TOOL_VERSION_pkg_config "1.8.1"
 #endif /* TOOL_VERSION_pkg_config */
 #ifndef MIN_TOOL_VERSION_pkg_config
 #define MIN_TOOL_VERSION_pkg_config(major1,major2,minor) (\
-  (major1) <  0 || \
-  (major1) == 0 && (major2) <  29 || \
-  (major1) == 0 && (major2) == 29 && (minor) <= 1)
+  (major1) <  1 || \
+  (major1) == 1 && (major2) <  8 || \
+  (major1) == 1 && (major2) == 8 && (minor) <= 1)
 #endif /* MIN_TOOL_VERSION_pkg_config */
 /* tool runghc-9.6.6 */
 #ifndef TOOL_VERSION_runghc
@@ -131,15 +131,15 @@
   (major1) == 9 && (major2) <  6 || \
   (major1) == 9 && (major2) == 6 && (minor) <= 6)
 #endif /* MIN_TOOL_VERSION_runghc */
-/* tool strip-2.34 */
+/* tool strip-2.42 */
 #ifndef TOOL_VERSION_strip
-#define TOOL_VERSION_strip "2.34"
+#define TOOL_VERSION_strip "2.42"
 #endif /* TOOL_VERSION_strip */
 #ifndef MIN_TOOL_VERSION_strip
 #define MIN_TOOL_VERSION_strip(major1,major2,minor) (\
   (major1) <  2 || \
-  (major1) == 2 && (major2) <  34 || \
-  (major1) == 2 && (major2) == 34 && (minor) <= 0)
+  (major1) == 2 && (major2) <  42 || \
+  (major1) == 2 && (major2) == 42 && (minor) <= 0)
 #endif /* MIN_TOOL_VERSION_strip */
 
 #ifndef CURRENT_COMPONENT_ID
