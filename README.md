@@ -40,7 +40,7 @@ Realizado por:\
   * text - An efficient packed Unicode text type
     
 ## Como executar?
-Em um ambiente LINUX com :
+Em um ambiente LINUX:
 1. Abra uma janela do terminal
 2. Acesse ao diretório em que deseja clonar o projeto usando `cd caminho_do_diretorio_desejado`
 3. Clone este repositório através do comando `git clone https://github.com/juanocv/haskgrademaker.git`
