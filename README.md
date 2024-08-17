@@ -13,8 +13,9 @@ Realizado por:\
 - [X] Construir as estruturas de dados
 - [X] Implementar busca básica em tela de disciplinas
 - [X] Imprimir disciplina(s) buscada(s) em tela
-- [X] Modularizar código
+- [X] Implementar modularização
 - [X] Fazer o tratamento de exceções http
+- [X] Adicionar comentários ao código
 
 ## TO-DOs (Parte 02)
 - [ ] Criar menu interativo para usuário

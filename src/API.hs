@@ -13,6 +13,8 @@ import Network.HTTP.Types.Status (statusCode)
 import Types
 import Parser
 
+-- A função abaixo foi feita com auxílio da documentação e exemplos disponíveis em:
+-- https://hackage.haskell.org/package/http-conduit-2.3.8.3/docs/Network-HTTP-Simple.html
 downloadAndParseDisciplinas :: String -> IO (Either String [Disciplina])
 downloadAndParseDisciplinas url = catch fetchAndParse handleHttpException
   where
@@ -22,6 +24,8 @@ downloadAndParseDisciplinas url = catch fetchAndParse handleHttpException
       let processedData = preprocessJSON rawData
       return $ parseJSON processedData
 
+-- A função abaixo foi feita com auxílio da documentação e exemplos disponíveis em:
+-- https://hackage.haskell.org/package/http-client-0.7.17/docs/Network-HTTP-Client
     handleHttpException :: HttpException -> IO (Either String [Disciplina])
     handleHttpException (HttpExceptionRequest _ (ConnectionFailure _)) =
       return $ Left "Erro: Não foi possível conectar ao servidor. Por favor, verifique sua conexão com a internet e tente novamente."

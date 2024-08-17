@@ -1,3 +1,6 @@
+-- Para a definição dos data types e instances abaixo contamos com o auxílio da documentação e exemplos disponíveis em:
+-- https://hackage.haskell.org/package/aeson-2.2.3.0/docs/Data-Aeson.html#g:11
+
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE RecordWildCards #-}
 
