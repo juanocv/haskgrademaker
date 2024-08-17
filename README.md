@@ -1,6 +1,8 @@
 # Hask Grade Maker
 
-Este projeto consiste na criação de um sistema que auxilia estudantes universitários na montagem de suas grades acadêmicas para o período letivo vigente. O sistema captura informações diretamente da web, extraindo dados sobre disciplinas, horários e outras informações relevantes disponíveis no JSON da universidade. Após a coleta, o sistema realiza um pré-processamento e pparsing dessas informações, transformando os dados brutos em estruturas organizadas e compreensíveis.
+Este projeto consiste na criação de um sistema que auxilia estudantes universitários na montagem de suas grades acadêmicas para o período letivo vigente. O sistema captura informações diretamente da web, extraindo dados sobre disciplinas, horários e outras informações relevantes disponíveis no JSON da universidade. 
+
+Após a coleta, o sistema realiza um pré-processamento e parsing dessas informações, transformando os dados brutos em estruturas organizadas e compreensíveis.
 
 Uma vez processadas as informações, o sistema oferece ao usuário uma interface intuitiva onde ele pode selecionar as disciplinas que deseja cursar. O sistema então monta visualmente a grade acadêmica, exibindo os horários das aulas de forma clara, evitando conflitos e sobreposições. Esse recurso é particularmente útil para estudantes que precisam otimizar seus horários de acordo com suas necessidades e preferências pessoais.
 
