@@ -46,12 +46,12 @@ getBinDir, getLibDir, getDynLibDir, getDataDir, getLibexecDir, getSysconfDir :: 
 
 
 bindir, libdir, dynlibdir, datadir, libexecdir, sysconfdir :: FilePath
-bindir     = "/home/gabriel/Documentos/haskgrademaker/.stack-work/install/x86_64-linux/c8e5f0c45c14c0baf0cf732da3dad0afe151506d8a130f8ef5b5f237ca1aa5eb/9.6.6/bin"
-libdir     = "/home/gabriel/Documentos/haskgrademaker/.stack-work/install/x86_64-linux/c8e5f0c45c14c0baf0cf732da3dad0afe151506d8a130f8ef5b5f237ca1aa5eb/9.6.6/lib/x86_64-linux-ghc-9.6.6/haskgrademaker-0.1.0.0-4oRSWRqbLtMG4ZPhhAWk3J-haskgrademaker"
-dynlibdir  = "/home/gabriel/Documentos/haskgrademaker/.stack-work/install/x86_64-linux/c8e5f0c45c14c0baf0cf732da3dad0afe151506d8a130f8ef5b5f237ca1aa5eb/9.6.6/lib/x86_64-linux-ghc-9.6.6"
-datadir    = "/home/gabriel/Documentos/haskgrademaker/.stack-work/install/x86_64-linux/c8e5f0c45c14c0baf0cf732da3dad0afe151506d8a130f8ef5b5f237ca1aa5eb/9.6.6/share/x86_64-linux-ghc-9.6.6/haskgrademaker-0.1.0.0"
-libexecdir = "/home/gabriel/Documentos/haskgrademaker/.stack-work/install/x86_64-linux/c8e5f0c45c14c0baf0cf732da3dad0afe151506d8a130f8ef5b5f237ca1aa5eb/9.6.6/libexec/x86_64-linux-ghc-9.6.6/haskgrademaker-0.1.0.0"
-sysconfdir = "/home/gabriel/Documentos/haskgrademaker/.stack-work/install/x86_64-linux/c8e5f0c45c14c0baf0cf732da3dad0afe151506d8a130f8ef5b5f237ca1aa5eb/9.6.6/etc"
+bindir     = "/home/seed/Documents/haskgrademaker/.stack-work/install/x86_64-linux/9805565a4d28a37ec8f2874fb9b321d830240e3d0cd0deac5827d5e328b0ca8e/9.6.6/bin"
+libdir     = "/home/seed/Documents/haskgrademaker/.stack-work/install/x86_64-linux/9805565a4d28a37ec8f2874fb9b321d830240e3d0cd0deac5827d5e328b0ca8e/9.6.6/lib/x86_64-linux-ghc-9.6.6/haskgrademaker-0.1.0.0-LrWSKlxbL0n1kDJ0tQ6sq-haskgrademaker"
+dynlibdir  = "/home/seed/Documents/haskgrademaker/.stack-work/install/x86_64-linux/9805565a4d28a37ec8f2874fb9b321d830240e3d0cd0deac5827d5e328b0ca8e/9.6.6/lib/x86_64-linux-ghc-9.6.6"
+datadir    = "/home/seed/Documents/haskgrademaker/.stack-work/install/x86_64-linux/9805565a4d28a37ec8f2874fb9b321d830240e3d0cd0deac5827d5e328b0ca8e/9.6.6/share/x86_64-linux-ghc-9.6.6/haskgrademaker-0.1.0.0"
+libexecdir = "/home/seed/Documents/haskgrademaker/.stack-work/install/x86_64-linux/9805565a4d28a37ec8f2874fb9b321d830240e3d0cd0deac5827d5e328b0ca8e/9.6.6/libexec/x86_64-linux-ghc-9.6.6/haskgrademaker-0.1.0.0"
+sysconfdir = "/home/seed/Documents/haskgrademaker/.stack-work/install/x86_64-linux/9805565a4d28a37ec8f2874fb9b321d830240e3d0cd0deac5827d5e328b0ca8e/9.6.6/etc"
 
 getBinDir     = catchIO (getEnv "haskgrademaker_bindir")     (\_ -> return bindir)
 getLibDir     = catchIO (getEnv "haskgrademaker_libdir")     (\_ -> return libdir)

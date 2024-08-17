@@ -4,12 +4,12 @@ name:                haskgrademaker
 version:             0.1.0.0
 -- synopsis:
 -- description:
-homepage:            https://github.com/githubuser/haskgrademaker#readme
+homepage:            https://github.com/juanocv/haskgrademaker#readme
 license:             BSD-3-Clause
 license-file:        LICENSE
-author:              Author name here
-maintainer:          example@example.com
-copyright:           2024 Author name here
+author:              Juan Carvalho, Gabriel Chacon
+maintainer:          juan.oliveira@aluno.ufabc.edu.br, gabriel.chacon@aluno.ufabc.edu.br
+copyright:           2024 Juan Carvalho, Gabriel Chacon
 category:            Web
 build-type:          Simple
 extra-source-files:  README.md
@@ -18,8 +18,10 @@ extra-source-files:  README.md
 executable haskgrademaker
   hs-source-dirs:      src
   main-is:             Main.hs
+  other-modules:       Types, Parser, API, Util
   default-language:    Haskell2010
-  build-depends:       base >= 4.7 && < 5, http-conduit, aeson, bytestring
+  build-depends:       base >= 4.7 && < 5, http-conduit, http-client, http-types, 
+                       aeson, bytestring, text
   ghc-options:         -Wall
                        -Wcompat
                        -Widentities

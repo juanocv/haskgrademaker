@@ -1,8 +1,16 @@
 /home/seed/Documents/haskgrademaker/CHANGELOG.md:
   hash: 2d36d516798bf002b44914b63fb4bcef8da5e8b8adfdbd5c7172a3196d794495
 /home/seed/Documents/haskgrademaker/README.md:
-  hash: 5a6053d42a2f59843f039ae934c9cc3d6c146caa87035e9ed8c5eb3c52e276b4
+  hash: 229346fd01feea286c2d4cc66ad8b9b3824968f0b9b0b959f938ccdadfffad96
 /home/seed/Documents/haskgrademaker/haskgrademaker.cabal:
-  hash: bb3f367c69aef76694bcc136520e223ee8a9f0fd0e1c0d8bdf1b63a681b23357
+  hash: bb64909255d90aadfeb27feca18f945f5583063dc5c676695fa84454afbc2cf4
+/home/seed/Documents/haskgrademaker/src/API.hs:
+  hash: ba7126bf0a516e274ffbabdf377ab3e8573ab4bdefefbc4ef210836d07b31b62
 /home/seed/Documents/haskgrademaker/src/Main.hs:
-  hash: d5747f3beb897fa777504a8f29b4c7b26d5cb4c23c84f842cbc13fbec8de4d8e
+  hash: c96dce8491942d49a2459c94cbfdcd951f60875431de2bc6dfbcc3fc98e1ebaf
+/home/seed/Documents/haskgrademaker/src/Parser.hs:
+  hash: 63c0f6b25ef5c89d3271145c1bd75d23ae9c5d2880e0aa97b60df20d38de96c6
+/home/seed/Documents/haskgrademaker/src/Types.hs:
+  hash: 0695704116639e562f7f5dbe09eb8f8ac08e3474a4f9170cf6bd1dd655239e17
+/home/seed/Documents/haskgrademaker/src/Util.hs:
+  hash: 2113d23bf0ef92985f979d9e5de706e82c20ed1953798eb2652e71d8c5901b2b

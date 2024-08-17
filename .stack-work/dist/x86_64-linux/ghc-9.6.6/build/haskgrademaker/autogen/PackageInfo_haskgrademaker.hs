@@ -20,6 +20,6 @@ version = Version [0,1,0,0] []
 synopsis :: String
 synopsis = ""
 copyright :: String
-copyright = "2024 Author name here"
+copyright = "2024 Juan Carvalho, Gabriel Chacon"
 homepage :: String
-homepage = "https://github.com/githubuser/haskgrademaker#readme"
+homepage = "https://github.com/juanocv/haskgrademaker#readme"
