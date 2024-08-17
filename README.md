@@ -1,6 +1,10 @@
 # Hask Grade Maker
 
-Projeto da disciplina de **Programação Funcional** do 2º quadrimestre de 2024 da Universidade Federal do ABC.
+Este projeto consiste na criação de um sistema que auxilia estudantes universitários na montagem de suas grades acadêmicas para o período letivo vigente. O sistema captura informações diretamente da web, extraindo dados sobre disciplinas, horários e outras informações relevantes disponíveis no JSON da universidade. Após a coleta, o sistema realiza um pré-processamento e pparsing dessas informações, transformando os dados brutos em estruturas organizadas e compreensíveis.
+
+Uma vez processadas as informações, o sistema oferece ao usuário uma interface intuitiva onde ele pode selecionar as disciplinas que deseja cursar. O sistema então monta visualmente a grade acadêmica, exibindo os horários das aulas de forma clara, evitando conflitos e sobreposições. Esse recurso é particularmente útil para estudantes que precisam otimizar seus horários de acordo com suas necessidades e preferências pessoais.
+
+Este é um projeto da disciplina de **Programação Funcional** do 2º quadrimestre de 2024 da Universidade Federal do ABC.
 
 Realizado por:\
 **- JUAN OLIVEIRA DE CARVALHO** [(juanocv)](https://github.com/juanocv)**\
@@ -12,7 +16,7 @@ Realizado por:\
 - [X] Fazer o tratamento de dados do JSON
 - [X] Construir as estruturas de dados
 - [X] Implementar busca básica em tela de disciplinas
-- [X] Imprimir disciplina(s) buscada(s) em tela
+- [X] Imprimir disciplina buscada em tela
 - [X] Implementar modularização
 - [X] Fazer o tratamento de exceções http
 - [X] Adicionar comentários ao código
