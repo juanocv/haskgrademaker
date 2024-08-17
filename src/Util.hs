@@ -13,7 +13,6 @@ import Types
 
 -- As funções abaixo foram feitas com auxílio da documentação e exemplos disponíveis em:
 -- https://hackage.haskell.org/package/base-4.20.0.1/docs/Prelude.html
--- Basicamente para compreender o uso de funções como show, unline e unwords
 
 showDisciplinas :: [Disciplina] -> [String]
 showDisciplinas = map showDisciplina
