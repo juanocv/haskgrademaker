@@ -1,4 +1,10 @@
-module Util where
+module Util
+  ( showDisciplinas
+  , showDisciplina
+  , showHorarios
+  , showHorario
+  , searchDisciplina
+  ) where
 
 import Data.List (isPrefixOf)
 import Data.Char (toLower)

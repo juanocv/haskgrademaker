@@ -4,7 +4,11 @@
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE RecordWildCards #-}
 
-module Types where
+module Types 
+  ( Disciplina(..)
+  , Horario(..)
+  , Obrigatoriedade(..)
+  ) where
 
 import Data.Aeson (FromJSON(..), withObject, (.:), (.:?))
 
