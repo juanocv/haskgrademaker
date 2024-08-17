@@ -26,3 +26,23 @@ Realizado por:\
 - [ ] Permitir ao usuário alterar a grade atual
 - [ ] Permitir ao usuário remover a grade atual
 - [ ] Tratamento de erros e exceções
+
+## Dependências
+  * ghcup - The Haskell toolchain installer
+  * ghc   - The Glasgow Haskell Compiler
+  * cabal - The Cabal build tool for managing Haskell software
+  * stack - A cross-platform program for developing Haskell projects (similar to cabal)
+  * http-conduit - HTTP client package with conduit interface and HTTPS support
+  * http-client - An HTTP client engine
+  * http-types - Generic HTTP types for Haskell (for both client and server code)
+  * aeson - Fast JSON parsing and encoding
+  * bytestring - Fast, compact, strict and lazy byte strings with a list interface
+  * text - An efficient packed Unicode text type
+    
+## Como executar?
+Em um ambiente LINUX com :
+1. Abra uma janela do terminal
+2. Acesse ao diretório em que deseja clonar o projeto usando `cd caminho_do_diretorio_desejado`
+3. Clone este repositório através do comando `git clone https://github.com/juanocv/haskgrademaker.git`
+4. Acesse a pasta do projeto através do comando `cd haskgrademaker`
+5. Execute utilizando `stack run`
