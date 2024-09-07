@@ -44,6 +44,7 @@ Realizado por:\
   * aeson - Fast JSON parsing and encoding
   * bytestring - Fast, compact, strict and lazy byte strings with a list interface
   * text - An efficient packed Unicode text type
+  * mtl - Monad classes for transformers, using functional dependencies
     
 ## Como executar?
 Em um ambiente LINUX:

@@ -21,7 +21,7 @@ executable haskgrademaker
   other-modules:       Types, Parser, API, Util, Grid
   default-language:    Haskell2010
   build-depends:       base >= 4.7 && < 5, http-conduit, http-client, http-types, 
-                       aeson, bytestring, text, mtl, sdl2 >= 2.0.6, process
+                       aeson, bytestring, text, mtl, process
   ghc-options:         -Wall
                        -Wcompat
                        -Widentities
