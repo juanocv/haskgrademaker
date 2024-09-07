@@ -24,14 +24,14 @@ Realizado por:\
 - [X] Adicionar comentários ao código
 
 ## TO-DOs (Parte 02)
-- [ ] Criar menu interativo para usuário
-- [ ] Permitir usuário criar nova grade
-- [ ] Permitir usuário selecionar disciplinas
-- [ ] Armazenar nova grade do usuário
-- [ ] Imprimir nova grade em tela
-- [ ] Permitir ao usuário alterar a grade atual
-- [ ] Permitir ao usuário remover a grade atual
-- [ ] Tratamento de erros e exceções
+- [X] Criar menu interativo para usuário
+- [X] Permitir usuário criar nova grade
+- [X] Permitir usuário selecionar disciplinas
+- [X] Armazenar nova grade do usuário
+- [X] Imprimir nova grade em tela
+- [X] Permitir ao usuário alterar a grade atual
+- [X] Permitir ao usuário remover a grade atual
+- [X] Tratamento de erros e exceções
 
 ## Dependências
   * ghcup - The Haskell toolchain installer
