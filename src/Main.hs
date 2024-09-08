@@ -27,7 +27,7 @@ main = do
 mainLoop :: [Types.Disciplina] -> Maybe Grid.GridState -> IO ()
 mainLoop disciplinas maybeGridState = do
   clearScreen
-  putStrLn "HaskGradeMaker - O Montador de Grades Favorito da UFABC"
+  putStrLn "HaskGradeMaker - O Montador de Grades Favorito da UFABC!"
   putStrLn "\n1. Criar nova grade acadêmica"
   putStrLn "2. Visualizar grade acadêmica"
   putStrLn "3. Limpar grade acadêmica"
