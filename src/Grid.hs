@@ -9,9 +9,9 @@ module Grid
 
 import Control.Monad.State
 import Control.Monad (forM_, void)
-import Data.List (sort, intersect)
+import Data.List (sort)
 import Types
-import Util (showDisciplina, searchDisciplina)
+import Util (showDisciplina, searchDisciplina, showHorario)
 import Data.Char (toLower)
 
 data GridState = GridState
@@ -41,7 +41,7 @@ gridBuilderLoop allDisciplinas clearScreen = do
     _   -> do
       liftIO clearScreen
       liftIO $ putStrLn "Opção inválida. Tente novamente."
-      liftIO getLine
+      _ <- liftIO getLine
       gridBuilderLoop allDisciplinas clearScreen
 
 addDisciplina :: [Disciplina] -> IO () -> GridBuilder ()
@@ -79,13 +79,13 @@ selectDisciplina :: [Disciplina] -> IO () -> GridBuilder (Maybe Disciplina)
 selectDisciplina [] clearScreen = do
   liftIO clearScreen
   liftIO $ putStrLn "Nenhuma disciplina encontrada."
-  liftIO getLine
+  _ <- liftIO getLine
   return Nothing
 selectDisciplina [d] _ = return (Just d)
 selectDisciplina disciplinas clearScreen = do
   liftIO clearScreen
   liftIO $ putStrLn "Múltiplas disciplinas encontradas. Escolha uma:"
-  forM_ (zip [1..] disciplinas) $ \(i, d) ->
+  forM_ (zip [1 :: Int ..] disciplinas) $ \(i, d) ->
     liftIO $ putStrLn $ show i ++ ". " ++ nome d
   choice <- liftIO getLine
   case reads choice of
@@ -94,7 +94,7 @@ selectDisciplina disciplinas clearScreen = do
     _ -> do
       liftIO clearScreen
       liftIO $ putStrLn "Escolha inválida. Tente novamente."
-      liftIO getLine
+      _ <- liftIO getLine
       selectDisciplina disciplinas clearScreen
 
 confirmDisciplina :: Disciplina -> IO () -> GridBuilder Bool
@@ -130,26 +130,8 @@ viewAcademicGrid gridState = do
   if null disciplinas
     then putStrLn "A grade acadêmica está vazia."
     else do
-      putStrLn "Grade acadêmica:"
       forM_ disciplinas $ \d -> do
         putStrLn $ "- " ++ nome d
         forM_ (horarios d) $ \h -> do
-          putStrLn $ "  " ++ showHorarioG h
+          putStrLn $ "  " ++ showHorario h
         putStrLn ""
-
-showHorarioG :: Horario -> String
-showHorarioG h = unwords
-  [ diaSemana (semana h)
-  , periodicidadeExtenso h
-  , head (horas h) ++ "-" ++ last (horas h)
-  ]
-
-diaSemana :: Int -> String
-diaSemana 1 = "Segunda-feira"
-diaSemana 2 = "Terça-feira"
-diaSemana 3 = "Quarta-feira"
-diaSemana 4 = "Quinta-feira"
-diaSemana 5 = "Sexta-feira"
-diaSemana 6 = "Sábado"
-diaSemana 7 = "Domingo"
-diaSemana _ = "Dia inválido"

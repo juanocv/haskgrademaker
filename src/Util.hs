@@ -33,19 +33,20 @@ showHorarios = unlines . map showHorario
 
 showHorario :: Horario -> String
 showHorario h = unwords
-  [ "\n\tDia:", evenSemana
+  [ "\n\tDia:", diaSemana (semana h)
   , "\n\tPeriodicidade" ++ periodicidadeExtenso h
   , "\n\tPeríodo:", head (horas h), "-", last (horas h)
   ]
-  where
-    evenSemana
-      | semana h == 1 = "Segunda-feira"
-      | semana h == 2 = "Terça-feira"
-      | semana h == 3 = "Quarta-feira"
-      | semana h == 4 = "Quinta-feira"
-      | semana h == 5 = "Sexta-feira"
-      | semana h == 6 = "Sábado"
-      | otherwise     = "Domingo"
+
+diaSemana :: Int -> String
+diaSemana 1 = "Segunda-feira"
+diaSemana 2 = "Terça-feira"
+diaSemana 3 = "Quarta-feira"
+diaSemana 4 = "Quinta-feira"
+diaSemana 5 = "Sexta-feira"
+diaSemana 6 = "Sábado"
+diaSemana 7 = "Domingo"
+diaSemana _ = "Dia inválido"
 
 searchDisciplina :: String -> [Disciplina] -> Either String [Disciplina]
 searchDisciplina s ds =

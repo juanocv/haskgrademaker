@@ -1,14 +1,18 @@
-module Main where
+module Main
+  ( main
+  , mainLoop
+  , clearScreen
+  ) where
 
 import qualified Types
-import qualified Parser
 import qualified API
-import qualified Util
 import qualified Grid
 import Control.Monad.State (runStateT)
 import Data.Maybe (fromMaybe)
 import System.Process (system)
 import System.Info (os)
+import Parser ()
+import Util ()
 
 main :: IO ()
 main = do
@@ -23,7 +27,7 @@ main = do
 mainLoop :: [Types.Disciplina] -> Maybe Grid.GridState -> IO ()
 mainLoop disciplinas maybeGridState = do
   clearScreen
-  putStrLn "HaskGradeMaker - O Montador de Grades Favorito da UFABC!"
+  putStrLn "HaskGradeMaker - O Montador de Grades Favorito da UFABC"
   putStrLn "\n1. Criar nova grade acadêmica"
   putStrLn "2. Visualizar grade acadêmica"
   putStrLn "3. Limpar grade acadêmica"
