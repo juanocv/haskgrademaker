@@ -25,12 +25,11 @@ Realizado por:\
 
 ## TO-DOs (Parte 02)
 - [X] Criar menu interativo para usuário
-- [X] Permitir usuário criar nova grade
-- [X] Permitir usuário selecionar disciplinas
-- [X] Armazenar nova grade do usuário
-- [X] Imprimir nova grade em tela
-- [X] Permitir ao usuário alterar a grade atual
-- [X] Permitir ao usuário remover a grade atual
+- [X] Permitir ao usuário criar nova grade
+- [X] Permitir ao usuário buscar disciplinas
+- [X] Permitir ao usuário limpar grade existente
+- [X] Permitir ao usuário visualizar nova grade
+- [X] Atualizar o estado da grade sucessivamente
 - [X] Tratamento de erros e exceções
 
 ## Dependências
