@@ -20,6 +20,12 @@ data GridState = GridState
 
 type GridBuilder a = StateT GridState IO a
 
+redColor :: String
+redColor = "\ESC[31m"
+
+resetColor :: String
+resetColor = "\ESC[0m"
+
 initialState :: GridState
 initialState = GridState { selectedDisciplinas = [] }
 
@@ -58,22 +64,29 @@ addDisciplina allDisciplinas clearScreen = do
       selected <- selectDisciplina matches clearScreen
       case selected of
         Just disciplina -> do
-          confirmed <- confirmDisciplina disciplina clearScreen
-          if confirmed
+          alreadyInGrade <- isDisciplinaInGrade disciplina
+          if alreadyInGrade
             then do
-              canAdd <- checkConcurrency disciplina
               liftIO clearScreen
-              if canAdd
-                then do
-                  modify (\s -> s { selectedDisciplinas = disciplina : selectedDisciplinas s })
-                  liftIO $ putStrLn $ "Disciplina '" ++ nome disciplina ++ "' adicionada com sucesso."
-                else liftIO $ putStrLn "Não é possível adicionar esta disciplina devido a conflitos de horário."
+              liftIO $ putStrLn $ "A disciplina '" ++ nome disciplina ++ "' já está na sua grade."
             else do
-              liftIO clearScreen
-              liftIO $ putStrLn "Adição da disciplina cancelada."
+              confirmed <- confirmDisciplina disciplina clearScreen
+              if confirmed
+                then do
+                  canAdd <- checkConcurrency disciplina
+                  liftIO clearScreen
+                  if canAdd
+                    then do
+                      modify (\s -> s { selectedDisciplinas = disciplina : selectedDisciplinas s })
+                      liftIO $ putStrLn $ "Disciplina '" ++ nome disciplina ++ "' adicionada com sucesso."
+                    else liftIO $ putStrLn "Não é possível adicionar esta disciplina devido a conflitos de horário."
+                else do
+                  liftIO clearScreen
+                  liftIO $ putStrLn "Adição da disciplina cancelada."
           liftIO $ putStrLn "Pressione qualquer tecla para continuar..."
           void $ liftIO getLine
         Nothing -> return ()
+
 
 selectDisciplina :: [Disciplina] -> IO () -> GridBuilder (Maybe Disciplina)
 selectDisciplina [] clearScreen = do
@@ -85,12 +98,37 @@ selectDisciplina [d] _ = return (Just d)
 selectDisciplina disciplinas clearScreen = do
   liftIO clearScreen
   liftIO $ putStrLn "Múltiplas disciplinas encontradas. Escolha uma:"
-  forM_ (zip [1 :: Int ..] disciplinas) $ \(i, d) ->
-    liftIO $ putStrLn $ show i ++ ". " ++ nome d
+  liftIO $ putStrLn "0. Voltar ao menu anterior"
+  
+  currentSelectedDisciplinas <- gets selectedDisciplinas
+  forM_ (zip [1 :: Int ..] disciplinas) $ \(i, d) -> do
+    inGrade <- isDisciplinaInGrade d
+    let hasConflict = any (hasConcurrency d) currentSelectedDisciplinas
+    let cannotSelect = inGrade || hasConflict
+    let colorCode = if cannotSelect then redColor else ""
+    let resetCode = if cannotSelect then resetColor else ""
+    let reason = if inGrade then " (já na grade)" 
+                 else if hasConflict then " (conflito de horário)"
+                 else ""
+    liftIO $ putStrLn $ colorCode ++ show i ++ ". " ++ nome d ++ reason ++ resetCode
+  
   choice <- liftIO getLine
   case reads choice of
-    [(i, "")] | i > 0 && i <= length disciplinas ->
-      return $ Just $ disciplinas !! (i - 1)
+    [(i, "")] 
+      | i > 0 && i <= length disciplinas -> do
+          let selectedDisciplina = disciplinas !! (i - 1)
+          inGrade <- isDisciplinaInGrade selectedDisciplina
+          let hasConflict = any (hasConcurrency selectedDisciplina) currentSelectedDisciplinas
+          if inGrade || hasConflict
+            then do
+              liftIO clearScreen
+              liftIO $ putStrLn $ "Não é possível selecionar esta disciplina." ++
+                                  if inGrade then " Ela já está na sua grade."
+                                  else " Há conflito de horário com disciplinas já selecionadas."
+              _ <- liftIO getLine
+              selectDisciplina disciplinas clearScreen
+            else return $ Just selectedDisciplina
+      | i == 0 -> return Nothing
     _ -> do
       liftIO clearScreen
       liftIO $ putStrLn "Escolha inválida. Tente novamente."
@@ -123,6 +161,11 @@ hasConcurrency d1 d2 = any (uncurry coincidePeriodo) [(h1, h2) | h1 <- horarios 
       let hs1Sorted = sort hs1
           hs2Sorted = sort hs2
       in (last hs1Sorted > head hs2Sorted) && (last hs2Sorted > head hs1Sorted)
+
+isDisciplinaInGrade :: Disciplina -> GridBuilder Bool
+isDisciplinaInGrade disciplina = do
+  selected <- gets selectedDisciplinas
+  return $ any (\d -> codigo d == codigo disciplina) selected
 
 viewAcademicGrid :: GridState -> IO ()
 viewAcademicGrid gridState = do
