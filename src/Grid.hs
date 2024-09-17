@@ -5,13 +5,14 @@ module Grid
   , GridBuilder
   , initialState
   , viewAcademicGrid
+  , formatDisciplina
   ) where
 
 import Control.Monad.State
 import Control.Monad (forM_, void)
 import Data.List (sort)
 import Types
-import Util (showDisciplina, searchDisciplina, showHorario, clearScreen)
+import Util (showDisciplina, searchDisciplina, clearScreen, formatDisciplina)
 import Data.Char (toLower)
 
 data GridState = GridState
@@ -46,7 +47,7 @@ gridBuilderLoop allDisciplinas = do
     "0" -> return ()
     _   -> do
       liftIO clearScreen
-      liftIO $ putStrLn "Opção inválida. Tente novamente."
+      liftIO $ putStrLn "Opção iválida. Tente novamente."
       _ <- liftIO getLine
       gridBuilderLoop allDisciplinas
 
@@ -167,14 +168,9 @@ isDisciplinaInGrade disciplina = do
   selected <- gets selectedDisciplinas
   return $ any (\d -> codigo d == codigo disciplina) selected
 
-viewAcademicGrid :: GridState -> IO ()
-viewAcademicGrid gridState = do
+viewAcademicGrid :: GridState -> String
+viewAcademicGrid gridState =
   let disciplinas = selectedDisciplinas gridState
-  if null disciplinas
-    then putStrLn "A grade acadêmica está vazia."
-    else do
-      forM_ disciplinas $ \d -> do
-        putStrLn $ "- " ++ nome d
-        forM_ (horarios d) $ \h -> do
-          putStrLn $ "  " ++ showHorario h
-        putStrLn ""
+  in if null disciplinas
+       then "A grade acadêmica está vazia."
+       else "Grade acadêmica:\n" ++ unlines (map formatDisciplina disciplinas)

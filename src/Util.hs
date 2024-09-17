@@ -4,6 +4,7 @@ module Util
   , showHorarios
   , showHorario
   , searchDisciplina
+  , formatDisciplina
   , clearScreen
   ) where
 
@@ -57,7 +58,13 @@ searchDisciplina s ds =
     in if null matches
        then Left "Nenhuma disciplina encontrada com esse nome."
        else Right matches
-       
+
+formatDisciplina :: Disciplina -> String
+formatDisciplina d =
+  let nomeDisciplina = "- " ++ nome d
+      horariosDisciplina = unlines (map showHorario (horarios d))
+  in nomeDisciplina ++ "\n" ++ horariosDisciplina
+  
 clearScreen :: IO ()
 clearScreen = do
   _ <- system clearCommand

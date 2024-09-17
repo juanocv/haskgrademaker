@@ -39,7 +39,7 @@ mainLoop disciplinas maybeGridState = do
       case maybeGridState of
         Just gridState -> do
           clearScreen
-          Grid.viewAcademicGrid gridState
+          putStrLn $ Grid.viewAcademicGrid gridState
           putStrLn "Pressione qualquer tecla para continuar..."
         Nothing -> do
           clearScreen
