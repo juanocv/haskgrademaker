@@ -11,7 +11,7 @@ import Control.Monad.State
 import Control.Monad (forM_, void)
 import Data.List (sort)
 import Types
-import Util (showDisciplina, searchDisciplina, showHorario)
+import Util (showDisciplina, searchDisciplina, showHorario, clearScreen)
 import Data.Char (toLower)
 
 data GridState = GridState
@@ -29,29 +29,29 @@ resetColor = "\ESC[0m"
 initialState :: GridState
 initialState = GridState { selectedDisciplinas = [] }
 
-buildAcademicGrid :: [Disciplina] -> IO () -> GridBuilder [Disciplina]
-buildAcademicGrid allDisciplinas clearScreen = do
-  gridBuilderLoop allDisciplinas clearScreen
+buildAcademicGrid :: [Disciplina] -> GridBuilder [Disciplina]
+buildAcademicGrid allDisciplinas = do
+  gridBuilderLoop allDisciplinas
   gets selectedDisciplinas
 
-gridBuilderLoop :: [Disciplina] -> IO () -> GridBuilder ()
-gridBuilderLoop allDisciplinas clearScreen = do
+gridBuilderLoop :: [Disciplina] -> GridBuilder ()
+gridBuilderLoop allDisciplinas = do
   liftIO clearScreen
   liftIO $ putStrLn "1. Adicionar disciplina\n0. Finalizar grade"
   choice <- liftIO getLine
   case choice of
     "1" -> do
-      addDisciplina allDisciplinas clearScreen
-      gridBuilderLoop allDisciplinas clearScreen
+      addDisciplina allDisciplinas
+      gridBuilderLoop allDisciplinas
     "0" -> return ()
     _   -> do
       liftIO clearScreen
       liftIO $ putStrLn "Opção inválida. Tente novamente."
       _ <- liftIO getLine
-      gridBuilderLoop allDisciplinas clearScreen
+      gridBuilderLoop allDisciplinas
 
-addDisciplina :: [Disciplina] -> IO () -> GridBuilder ()
-addDisciplina allDisciplinas clearScreen = do
+addDisciplina :: [Disciplina] -> GridBuilder ()
+addDisciplina allDisciplinas = do
   liftIO clearScreen
   liftIO $ putStrLn "Digite o nome da disciplina:"
   query <- liftIO getLine
@@ -61,7 +61,7 @@ addDisciplina allDisciplinas clearScreen = do
       liftIO $ putStrLn err
       void $ liftIO getLine
     Right matches -> do
-      selected <- selectDisciplina matches clearScreen
+      selected <- selectDisciplina matches
       case selected of
         Just disciplina -> do
           alreadyInGrade <- isDisciplinaInGrade disciplina
@@ -70,7 +70,7 @@ addDisciplina allDisciplinas clearScreen = do
               liftIO clearScreen
               liftIO $ putStrLn $ "A disciplina '" ++ nome disciplina ++ "' já está na sua grade."
             else do
-              confirmed <- confirmDisciplina disciplina clearScreen
+              confirmed <- confirmDisciplina disciplina
               if confirmed
                 then do
                   canAdd <- checkConcurrency disciplina
@@ -88,14 +88,14 @@ addDisciplina allDisciplinas clearScreen = do
         Nothing -> return ()
 
 
-selectDisciplina :: [Disciplina] -> IO () -> GridBuilder (Maybe Disciplina)
-selectDisciplina [] clearScreen = do
+selectDisciplina :: [Disciplina] -> GridBuilder (Maybe Disciplina)
+selectDisciplina [] = do
   liftIO clearScreen
   liftIO $ putStrLn "Nenhuma disciplina encontrada."
   _ <- liftIO getLine
   return Nothing
-selectDisciplina [d] _ = return (Just d)
-selectDisciplina disciplinas clearScreen = do
+selectDisciplina [d] = return (Just d)
+selectDisciplina disciplinas = do
   liftIO clearScreen
   liftIO $ putStrLn "Múltiplas disciplinas encontradas. Escolha uma:"
   liftIO $ putStrLn "0. Voltar ao menu anterior"
@@ -126,17 +126,17 @@ selectDisciplina disciplinas clearScreen = do
                                   if inGrade then " Ela já está na sua grade."
                                   else " Há conflito de horário com disciplinas já selecionadas."
               _ <- liftIO getLine
-              selectDisciplina disciplinas clearScreen
+              selectDisciplina disciplinas
             else return $ Just selectedDisciplina
       | i == 0 -> return Nothing
     _ -> do
       liftIO clearScreen
       liftIO $ putStrLn "Escolha inválida. Tente novamente."
       _ <- liftIO getLine
-      selectDisciplina disciplinas clearScreen
+      selectDisciplina disciplinas
 
-confirmDisciplina :: Disciplina -> IO () -> GridBuilder Bool
-confirmDisciplina disciplina clearScreen = do
+confirmDisciplina :: Disciplina -> GridBuilder Bool
+confirmDisciplina disciplina = do
   liftIO clearScreen
   liftIO $ putStrLn "Informações da disciplina selecionada:"
   liftIO $ putStrLn $ showDisciplina disciplina

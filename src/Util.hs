@@ -4,8 +4,11 @@ module Util
   , showHorarios
   , showHorario
   , searchDisciplina
+  , clearScreen
   ) where
 
+import System.Process (system)
+import System.Info (os)
 import Data.List (isPrefixOf)
 import Data.Char (toLower)
 
@@ -54,3 +57,12 @@ searchDisciplina s ds =
     in if null matches
        then Left "Nenhuma disciplina encontrada com esse nome."
        else Right matches
+       
+clearScreen :: IO ()
+clearScreen = do
+  _ <- system clearCommand
+  return ()
+  where
+    clearCommand
+      | os == "mingw32" = "cls"
+      | otherwise       = "clear"

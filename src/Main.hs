@@ -1,7 +1,6 @@
 module Main
   ( main
   , mainLoop
-  , clearScreen
   ) where
 
 import qualified Types
@@ -9,10 +8,8 @@ import qualified API
 import qualified Grid
 import Control.Monad.State (runStateT)
 import Data.Maybe (fromMaybe)
-import System.Process (system)
-import System.Info (os)
 import Parser ()
-import Util ()
+import Util (clearScreen)
 
 main :: IO ()
 main = do
@@ -35,7 +32,7 @@ mainLoop disciplinas maybeGridState = do
   choice <- getLine
   case choice of
     "1" -> do
-      (_, newGridState) <- runStateT (Grid.buildAcademicGrid disciplinas clearScreen) (fromMaybe Grid.initialState maybeGridState)
+      (_, newGridState) <- runStateT (Grid.buildAcademicGrid disciplinas) (fromMaybe Grid.initialState maybeGridState)
       clearScreen
       mainLoop disciplinas (Just newGridState)
     "2" -> do
@@ -63,12 +60,3 @@ mainLoop disciplinas maybeGridState = do
       putStrLn "Opção inválida. Tente novamente."
       _ <- getLine 
       mainLoop disciplinas maybeGridState
-
-clearScreen :: IO ()
-clearScreen = do
-  _ <- system clearCommand
-  return ()
-  where
-    clearCommand
-      | os == "mingw32" = "cls"
-      | otherwise       = "clear"
