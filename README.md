@@ -44,6 +44,7 @@ Realizado por:\
   * bytestring - Fast, compact, strict and lazy byte strings with a list interface
   * text - An efficient packed Unicode text type
   * mtl - Monad classes for transformers, using functional dependencies
+  * process - Libraries for dealing with system processes
     
 ## Como executar?
 Em um ambiente LINUX:
