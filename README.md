@@ -12,6 +12,10 @@ Realizado por:\
 **- JUAN OLIVEIRA DE CARVALHO** [(juanocv)](https://github.com/juanocv)**\
 **- FERNANDO GABRIEL CHACON FERNANDES TERUEL DO PRADO** [(gabriel-chacon)](https://github.com/gabriel-chacon)**
 
+Vídeo no Youtube:\
+**- Apresentação Parte 01: https://www.youtube.com/watch?v=WmBlnQ2gy10**\
+**- Apresentação Parte 02: https://www.youtube.com/watch?v=-SPcn8Pr80o**\
+
 ## TO-DOs (Parte 01)
 - [X] Definir as estruturas de dados
 - [X] Realizar o download do JSON do site da UFABC
