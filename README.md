@@ -13,8 +13,8 @@ Realizado por:\
 **- FERNANDO GABRIEL CHACON FERNANDES TERUEL DO PRADO** [(gabriel-chacon)](https://github.com/gabriel-chacon)**
 
 Vídeo no Youtube:\
-**- Apresentação Parte 01: https://www.youtube.com/watch?v=WmBlnQ2gy10**\
-**- Apresentação Parte 02: https://www.youtube.com/watch?v=-SPcn8Pr80o**\
+**- [(Apresentação Parte 01)](https://www.youtube.com/watch?v=WmBlnQ2gy10)**\
+**- [(Apresentação Parte 02)](https://www.youtube.com/watch?v=-SPcn8Pr80o)**
 
 ## TO-DOs (Parte 01)
 - [X] Definir as estruturas de dados
